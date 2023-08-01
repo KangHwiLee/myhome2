@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_profile" />
 
     <TextView
-        android:id="@+id/tv_greet"
+        android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_profile" />
 
     <TextView
-        android:id="@+id/tv_age"
+        android:id="@+id/tv_cnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

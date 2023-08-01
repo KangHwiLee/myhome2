@@ -15,14 +15,15 @@ class UserAdapter (val context: Context, val ItemList : ArrayList<Item>) : BaseA
 
         val profile = view.findViewById<ImageView>(R.id.iv_profile)
         val name = view.findViewById<TextView>(R.id.tv_name)
-        val age = view.findViewById<TextView>(R.id.tv_age)
-        val greet = view.findViewById<TextView>(R.id.tv_greet)
+        val cnt = view.findViewById<TextView>(R.id.tv_cnt)
+        val type = view.findViewById<TextView>(R.id.tv_type)
 
         val user = ItemList[position]
 
         profile.setImageResource(user.profile)
         name.text = user.name
-        age.text = user.age.toString()
+        cnt.text = user.cnt.toString()
+        type.text = user.type.toString()
 
         return view
     }
@@ -39,8 +40,18 @@ class UserAdapter (val context: Context, val ItemList : ArrayList<Item>) : BaseA
         return 0
     }
 
-    fun getAge(p : Int) : Int{
-        return ItemList.get(p).age
+    fun getCnt(p : Int) : Int{
+        return ItemList.get(p).cnt
+    }
+   fun getName(p : Int) : String{
+        return ItemList.get(p).name
+    }
+    fun getType(p : Int) : Int{
+        return ItemList.get(p).type
+    }
+
+    fun getInfo(p : Int) : Item{
+        return ItemList.get(p)
     }
 
 }
