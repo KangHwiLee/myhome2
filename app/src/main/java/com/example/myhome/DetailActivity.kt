@@ -1,6 +1,5 @@
 package com.example.myhome
 
-import android.app.ActionBar.LayoutParams
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
@@ -8,18 +7,17 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myhome.databinding.ActivityMain2Binding
-import java.util.regex.Pattern
+import com.example.myhome.databinding.ActivityDetailBinding
 
 
-class MainActivity2 : AppCompatActivity() {
-    private var mBinding : ActivityMain2Binding? = null;
+class DetailActivity : AppCompatActivity() {
+    private var mBinding : ActivityDetailBinding? = null;
     private val binding get() = mBinding!!
 
     private lateinit var tableLayout: TableLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivityMain2Binding.inflate(layoutInflater)
+        mBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if(intent.hasExtra("info")){
             println(intent.getStringArrayListExtra("info"))
