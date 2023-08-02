@@ -1,13 +1,16 @@
 package com.example.myhome
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.TextViewCompat
 import com.example.myhome.databinding.ActivityDetailBinding
 
 
@@ -57,6 +60,7 @@ class DetailActivity : AppCompatActivity() {
         binding.totalPrice.text = price.toString()+"원"
         // 초기에 두 개의 행을 추가하는 예시
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun addRowToTable(vararg cells: String) {
         val tableRow = TableRow(this)
         val layoutParams = TableRow.LayoutParams(
@@ -70,6 +74,7 @@ class DetailActivity : AppCompatActivity() {
             textView.text = cellText
             textView.gravity = Gravity.CENTER
             textView.setPadding(16, 16, 16, 16)
+            textView.setAutoSizeTextTypeUniformWithConfiguration(12, 14, 5, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM)
             tableRow.addView(textView)
         }
 
