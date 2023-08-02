@@ -18,7 +18,7 @@ class CommonService {
         else if (index == 10) "라벤더"
         else if (index == 11) "양배추"
         else if (index == 12) "바닐라"
-        else if (index == 13) "강낭콩"
+        else if (index == 13) "콩"
         else if (index == 14) "사과"
         else if (index == 15) "오렌지"
         else if (index == 16) "복숭아"

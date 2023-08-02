@@ -1,5 +1,6 @@
 package com.example.myhome
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
@@ -17,25 +18,43 @@ class DetailActivity : AppCompatActivity() {
     private val service : CommonService = CommonService();
 
     private lateinit var tableLayout: TableLayout
+
+    lateinit var pref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        pref = getSharedPreferences("option", MODE_PRIVATE)
+
         if(intent.hasExtra("info")){
             println(intent.getStringArrayListExtra("info"))
         }
 
-
+        binding.itemExplan.text = "test입니다"
         tableLayout = binding.itemTable
         var text1 : String = "";
-        intent.getStringArrayListExtra("info")?.forEachIndexed { index, s ->
-            if(index > 0 && !s.trim().isEmpty()){
-            addRowToTable(service.indexConvertToName(index), s, "test")
-            }
-            if(index > 88){
-                return
+        var price : Int = 0;
+        run breaker@{
+            intent.getStringArrayListExtra("info")?.forEachIndexed { index, s ->
+                if(index == 0){
+                    binding.itemExplan.text = s
+                }
+                else if (index > 0 && !s.trim().isEmpty()) {
+                    addRowToTable(
+                        service.indexConvertToName(index),
+                        s,
+                        pref.getInt(index.toString(), 0).toString(),
+                        (pref.getInt(index.toString(), 0) * s.toInt()).toString()
+                    )
+                    price += pref.getInt(index.toString(), 0) * s.toInt();
+                }
+                if (index > 88) {
+                    return@breaker
+                }
             }
         }
+        binding.totalPrice.text = price.toString()+"원"
         // 초기에 두 개의 행을 추가하는 예시
     }
     private fun addRowToTable(vararg cells: String) {

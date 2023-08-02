@@ -3,6 +3,9 @@ package com.example.myhome
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.text.method.DigitsKeyListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -10,6 +13,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.edit
+import androidx.core.widget.addTextChangedListener
 import com.example.myhome.databinding.ActivitySettingBinding
 import com.example.myhome.databinding.AutoTextViewBinding
 import org.w3c.dom.Text
@@ -39,7 +44,41 @@ class SettingActivity : AppCompatActivity() {
             var test : ConstraintLayout = binding2.itemField
             binding2.itemName1.text = service.indexConvertToName(i)
             binding2.editText1.setText(pref.getInt(i.toString(), 0).toString())
+
+            binding2.editText1.keyListener = DigitsKeyListener.getInstance("0123456789")
+
+            val textWatcher = object : TextWatcher {
+                private var editTextId: Int = 0 // EditText의 ID를 저장할 변수
+
+                // EditText의 ID를 설정하는 메서드
+                fun setEditTextId(id: Int) {
+                    editTextId = id
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    // 입력하기 전 호출
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    // 입력 중 호출
+                    // 텍스트가 변경될 때마다 실행되는 코드를 여기에 작성
+                    val text = s.toString()
+                    pref.edit {
+                        putInt(editTextId.toString(), text.toInt())
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    // 입력 후 호출
+                }
+            }
+
+            binding2.editText1.addTextChangedListener(textWatcher)
+
+            binding2.editText1.id = i
+            textWatcher.setEditTextId(binding2.editText1.id)
             binding.itemScroll.addView(test)
+
 
         }
 

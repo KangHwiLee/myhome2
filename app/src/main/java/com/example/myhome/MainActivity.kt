@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("info", map.get(Adapter.getType(position))?.get(Adapter.getCnt(position)))
             intent.putExtra("type", Adapter.getType(position))
+            println(map.get(Adapter.getType(position))?.get(Adapter.getCnt(position)))
             startActivity(intent)
         }
         binding.button2.setOnClickListener {
