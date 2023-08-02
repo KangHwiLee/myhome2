@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
+import androidx.core.content.edit
 import com.example.myhome.databinding.ActivityMainBinding
 import com.example.myhomecalculator.ItemLoad
 
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
     private var map = HashMap<Int, ArrayList<ArrayList<String>>>()
     private var ItemList = arrayListOf<Item> ()
+    private var service : CommonService = CommonService()
+    lateinit var pref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -23,8 +26,8 @@ class MainActivity : AppCompatActivity() {
              //마이홈 아이템 리스트 만들기
         var funItem:ItemLoad = ItemLoad();
         map  = funItem.readTextFromAssets(this, 0)
-
-
+        pref = getSharedPreferences("option", MODE_PRIVATE)
+        inquire()       //최초 접속인지 확인, sharedPreferences값 없으면 초기값 설정
 
         for(i:Int in 1 .. 9){
             var cnt:Int = 0
@@ -60,15 +63,12 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    fun inquire() {
-        val pref : SharedPreferences = getSharedPreferences("1", Activity.MODE_PRIVATE)
-        if(pref == null){
-            defaultDataSetting(pref);
+    private fun inquire() {
+        if(pref.getInt("1", 0) == 0){
+            service.defaultDataSetting(pref);
         }
     }
 
-    fun defaultDataSetting(pref : SharedPreferences) {
-        ItemList.size
-    }
 
 }
+
