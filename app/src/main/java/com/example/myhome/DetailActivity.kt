@@ -1,10 +1,15 @@
 package com.example.myhome
 
+import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.AssetManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -12,6 +17,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.TextViewCompat
 import com.example.myhome.databinding.ActivityDetailBinding
+import java.io.IOException
+import java.io.InputStream
 
 
 class DetailActivity : AppCompatActivity() {
@@ -24,6 +31,7 @@ class DetailActivity : AppCompatActivity() {
 
     lateinit var pref: SharedPreferences
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityDetailBinding.inflate(layoutInflater)
@@ -45,6 +53,7 @@ class DetailActivity : AppCompatActivity() {
                 }
                 else if (index > 0 && !s.trim().isEmpty()) {
                     addRowToTable(
+                        index,
                         service.indexConvertToName(index),
                         s,
                         pref.getInt(index.toString(), 0).toString(),
@@ -60,8 +69,9 @@ class DetailActivity : AppCompatActivity() {
         binding.totalPrice.text = price.toString()+"원"
         // 초기에 두 개의 행을 추가하는 예시
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun addRowToTable(vararg cells: String) {
+    private fun addRowToTable(i : Int, vararg cells: String) {
         val tableRow = TableRow(this)
         val layoutParams = TableRow.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -69,6 +79,10 @@ class DetailActivity : AppCompatActivity() {
         )
         tableRow.layoutParams = layoutParams
 
+        val imageView = ImageView(this)
+        val imageBitmap = service.getImageFromAssets(this, "picture/default/"+i.toString()+".png")
+        imageView.setImageBitmap(imageBitmap)
+        tableRow.addView(imageView)
         for (cellText in cells) {
             val textView = TextView(this)
             textView.text = cellText
@@ -80,5 +94,16 @@ class DetailActivity : AppCompatActivity() {
 
         tableLayout.addView(tableRow)
     }
+
+//    private fun getImageFromAssets(context: Context, fileName: String): Bitmap? {
+//        val assetManager: AssetManager = context.assets
+//        return try {
+//            val inputStream: InputStream = assetManager.open(fileName)
+//            BitmapFactory.decodeStream(inputStream)
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//            null
+//        }
+//    }
 
 }

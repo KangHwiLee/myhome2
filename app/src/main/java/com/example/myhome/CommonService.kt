@@ -1,7 +1,13 @@
 package com.example.myhome
 
+import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.AssetManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.core.content.edit
+import java.io.IOException
+import java.io.InputStream
 
 class CommonService {
     fun indexConvertToName(index: Int): String {
@@ -192,4 +198,16 @@ class CommonService {
         }
 
     }
+
+    fun getImageFromAssets(context: Context, fileName: String): Bitmap? {
+        val assetManager: AssetManager = context.assets
+        return try {
+            val inputStream: InputStream = assetManager.open(fileName)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
 }

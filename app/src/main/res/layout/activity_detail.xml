@@ -86,6 +86,14 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:layout_width="70px"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="사진"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
