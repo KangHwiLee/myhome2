@@ -210,4 +210,15 @@ class CommonService {
         }
     }
 
+    fun SearchToFileName(i : Int) : String{
+        return if(i == 1) "cooking"
+        else if(i == 2) "dojagi"
+        else if(i == 3) "gajuk"
+        else if(i == 4) "gita"
+        else if(i == 5) "gumsok"
+        else if(i == 6) "jebong"
+//        else if(i == 7) "lobin"
+        else "star"
+    }
+
 }

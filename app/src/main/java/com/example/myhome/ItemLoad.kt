@@ -2,6 +2,7 @@ package com.example.myhomecalculator
 
 import android.content.Context
 import android.content.res.AssetManager
+import com.example.myhome.CommonService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,6 +14,8 @@ import java.lang.Exception
 
 class ItemLoad {
 
+    val service : CommonService = CommonService()
+
     fun readTextFromAssets(context: Context, CategoryFile: Int): HashMap<Int, ArrayList<ArrayList<String>>> {
         val originalMap = readToAllFile(context)
         val convertedMap = convertToArrayListOfStringLists(originalMap)
@@ -23,9 +26,9 @@ class ItemLoad {
         var map = HashMap<Int, ArrayList<List<String>>>()
 
         var token : List<String>
-        for(i : Int in 1 .. 9){
+        for(i : Int in 1 .. 8){
             var ItemList = arrayListOf<List<String>>()
-            var fileName : String = SearchToFileName(i)
+            var fileName : String = service.SearchToFileName(i)
             val inputStream: InputStream = assetManager.open(fileName+".txt")
             try {
                 inputStream.bufferedReader().readLines().forEach {
@@ -68,17 +71,5 @@ class ItemLoad {
 //
 //        return ""
 //    }
-
-    private fun SearchToFileName(i : Int) : String{
-        return if(i == 1) "cooking"
-        else if(i == 2) "dojagi"
-        else if(i == 3) "gajuk"
-        else if(i == 4) "gita"
-        else if(i == 5) "gumsok"
-        else if(i == 6) "jebong"
-        else if(i == 7) "lobin"
-        else if(i == 8) "star"
-        else "tree"
-    }
 
 }

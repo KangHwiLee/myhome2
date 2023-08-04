@@ -13,7 +13,7 @@
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="0.12"
+        android:layout_weight="0.18"
         android:background="@drawable/test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,36 +26,37 @@
             android:id="@+id/itemSearch"
             android:layout_width="225dp"
             android:layout_height="48dp"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="167dp"
-            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="아이템 이름을 입력해주세요"
             android:inputType="text"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.502" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="84dp"
             android:layout_height="48dp"
-            android:layout_marginStart="39dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="19dp"
             android:text="검색"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/itemSearch"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.503" />
+            app:layout_constraintVertical_bias="0.807" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="172dp"
+            android:layout_height="48dp"
+            android:entries="@array/spinner_items"
+            app:layout_constraintBottom_toTopOf="@+id/itemSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.634" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -67,7 +68,7 @@
         android:id="@+id/mainContainer2"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="0.88"
+        android:layout_weight="0.82"
         android:background="@drawable/test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

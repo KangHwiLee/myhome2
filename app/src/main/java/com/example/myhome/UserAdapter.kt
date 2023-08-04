@@ -20,7 +20,7 @@ class UserAdapter (val context: Context, val ItemList : ArrayList<Item>) : BaseA
 
         val user = ItemList[position]
 
-        profile.setImageResource(user.profile)
+        profile.setImageBitmap(user.profile)
         name.text = user.name
         cnt.text = user.cnt.toString()
         type.text = user.type.toString()

@@ -42,10 +42,23 @@ class DetailActivity : AppCompatActivity() {
             println(intent.getStringArrayListExtra("info"))
         }
 
-        binding.itemExplan.text = "test입니다"
         tableLayout = binding.itemTable
         var text1 : String = "";
         var price : Int = 0;
+
+println(intent.getIntExtra("type", 0))
+println(intent.getIntExtra("cnt", 0))
+
+        binding.mainImage.setImageBitmap(service.getImageFromAssets(
+            this,
+            "picture/"
+                    +service.SearchToFileName(intent.getIntExtra("type", 0))
+                    +"/"
+                    +(intent.getIntExtra("cnt", 0)+1).toString()
+                    +".png"
+        ))
+        binding.
+
         run breaker@{
             intent.getStringArrayListExtra("info")?.forEachIndexed { index, s ->
                 if(index == 0){
